@@ -12,7 +12,7 @@
         "status": "ready",
         "location": "STOCK JKT: Pallazo (1)",
         "notes": "MAPPING: Mas fungherry (1)",
-        "updatedAt": "2026-09-09T23:13:38.294Z"
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-02",
@@ -26,8 +26,8 @@
         "qty": 8,
         "status": "ready",
         "location": "Pallazo (6), Demo IT Talk: SMG (1), SBY (1)",
-        "notes": "MAPPING: Kak Pipit - RSIJ (5), Kak puput - Mr DIY (1)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "notes": "STOCK JKT: Pallazo (6) | DEMO: SMG (1), SBY (1)",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-03",
@@ -41,8 +41,8 @@
         "qty": 24,
         "status": "ready",
         "location": "Pallazo (21), Demo Pegadaian (1), IT Talk JKT (1), IT Talk SMG (1)",
-        "notes": "MAPPING: Kak puput - DIY (1)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "notes": "STOCK JKT: Pallazo (21) | DEMO: Pegadaian (1), IT Talk JKT (1), SMG (1)",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-04",
@@ -56,23 +56,8 @@
         "qty": 5,
         "status": "ready",
         "location": "Pallazo (5)",
-        "notes": "MAPPING: Kak pipit - Daesang (1), Mba Irwin - Fuluso (1)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
-    },
-    {
-        "id": "dell-05",
-        "brand": "DELL",
-        "partNumber": "GA7440I7V2",
-        "name": "Latitude 7440 I7-1365U-16GB-512GB-W11P-U-3Y Touch",
-        "category": "laptop",
-        "cpu": "Intel Core i7-1365U",
-        "ram": "16GB",
-        "storage": "512GB SSD",
-        "qty": 2,
-        "status": "ready",
-        "location": "Pallazo (2) - 1 unit pak igun bekas service",
-        "notes": "MAPPING: Kak Puput - MR DIY (1)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "notes": "STOCK JKT: Pallazo (5)",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-06",
@@ -86,8 +71,8 @@
         "qty": 1,
         "status": "ready",
         "location": "Pallazo (1)",
-        "notes": "MAPPING: Mas Funghery (1)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "notes": "STOCK JKT: Pallazo (1)",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-07",
@@ -101,8 +86,8 @@
         "qty": 13,
         "status": "ready",
         "location": "Pallazo (8), IT Talk JKT (2), SMG (1), SBY (1)",
-        "notes": "Service: Unit dicek (1)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "notes": "STOCK JKT: Pallazo (8) | IT TALK: JKT (2), SMG (1), SBY (1) - unit display/sewa",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-08",
@@ -116,8 +101,8 @@
         "qty": 40,
         "status": "ready",
         "location": "Pallazo (40)",
-        "notes": "MAPPING: Kak Pipit - VTS (1)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "notes": "STOCK JKT: Pallazo (40)",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-09",
@@ -131,23 +116,8 @@
         "qty": 15,
         "status": "ready",
         "location": "Pallazo (15)",
-        "notes": "Barang Project (Bisa diiklankan)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
-    },
-    {
-        "id": "hp-01",
-        "brand": "HP",
-        "partNumber": "8M0Y5PA",
-        "name": "HP MAVERICK 280 G9 i5-12500 16GB 512GB WIN11P",
-        "category": "pc-desktop",
-        "cpu": "Intel Core i5-12500",
-        "ram": "16GB",
-        "storage": "512GB SSD",
-        "qty": 1,
-        "status": "ready",
-        "location": "STOCK DEMO",
-        "notes": "Demo Internal - Team Pak Eddy (1) inventaris",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "notes": "STOCK JKT: Pallazo (15)",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "hp-02",
@@ -160,9 +130,9 @@
         "storage": "512GB SSD",
         "qty": 16,
         "status": "ready",
-        "location": "PALLAZO (16)",
+        "location": "STOCK JKT: PALLAZO (16)",
         "notes": "STOCK JKT: Pallazo (16)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "hp-03",
@@ -175,9 +145,9 @@
         "storage": "256GB SSD",
         "qty": 1,
         "status": "ready",
-        "location": "PALLAZO (1)",
+        "location": "STOCK JKT: PALLAZO (1)",
         "notes": "STOCK JKT: Unit selesai service, replace motherboard",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "hp-04",
@@ -190,24 +160,9 @@
         "storage": "256GB SSD",
         "qty": 1,
         "status": "ready",
-        "location": "IT TALK AMBAS (1)",
-        "notes": "STOCK DEMO: Barang Display Toko",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
-    },
-    {
-        "id": "hp-05",
-        "brand": "HP",
-        "partNumber": "61G52PA",
-        "name": "HP 240-G8-i5-1135G7-8GB-512GB-Intel UHD-14Inch-W11H",
-        "category": "laptop",
-        "cpu": "Intel Core i5-1135G7",
-        "ram": "8GB",
-        "storage": "512GB SSD",
-        "qty": 3,
-        "status": "ready",
-        "location": "PALLAZO (2)",
-        "notes": "Alokasi Pak Igun (2), Mapping Kak Pipit BTL (1), Service (3)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "location": "STOCK DEMO: IT TALK AMBAS (1)",
+        "notes": "STOCK DEMO: IT TALK AMBAS (1) - Barang Display Toko",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "hp-06",
@@ -220,9 +175,9 @@
         "storage": "512GB SSD",
         "qty": 3,
         "status": "ready",
-        "location": "IT TALK SBY (1), IT TALK AMBAS (1)",
-        "notes": "Services: 1 unit tidak bisa diservice",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "location": "IT TALK SBY (1), IT TALK AMBAS (1), SERVICE (1)",
+        "notes": "STOCK IT TALK: SBY (1), AMBAS (1) | SERVICES: (1) - unit tidak bisa service (Total Real: 3)",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "hp-07",
@@ -235,9 +190,9 @@
         "storage": "128GB SSD + 1TB HDD",
         "qty": 1,
         "status": "ready",
-        "location": "IT TALK AMBAS (1)",
-        "notes": "STOCK IT TALK: Barang Display Toko",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "location": "STOCK IT TALK: IT TALK AMBAS (1)",
+        "notes": "STOCK IT TALK: IT TALK AMBAS (1) - Barang Display Toko",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "hp-08",
@@ -249,10 +204,10 @@
         "ram": "8GB",
         "storage": "1TB HDD",
         "qty": 62,
+        "location": "PALLAZO (43), KLAIM HP (2), SERVICE (17)",
+        "notes": "Pallazo 43 unit (7 OK, 3 repacking dus), Klaim DOA ke HP (2), Unit service customer (17)",
         "status": "ready",
-        "location": "PALLAZO (45)",
-        "notes": "Pallazo 45 unit (8 OK, 3 repacking dus), Klaim DOA ke HP (2), Unit service customer (15)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "updatedAt": "2026-09-12T13:58:29.803Z"
     },
     {
         "id": "hp-09",
@@ -265,9 +220,9 @@
         "storage": "512GB SSD",
         "qty": 42,
         "status": "ready",
-        "location": "PALLAZO (42)",
+        "location": "STOCK JKT: PALLAZO (42)",
         "notes": "PALLAZO (42) Dus Bagus | MAPPING: BTL (10)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "hp-10",
@@ -278,11 +233,11 @@
         "cpu": "Intel Core i7-1355U",
         "ram": "16GB",
         "storage": "1TB SSD",
-        "qty": 16,
+        "qty": 15,
         "status": "ready",
-        "location": "PALLAZO (16)",
-        "notes": "STOCK JKT: Pallazo (16)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "location": "STOCK JKT: Pallazo (15)",
+        "notes": "STOCK JKT: Pallazo (15)",
+        "updatedAt": "2026-09-12T13:56:27.283Z"
     },
     {
         "id": "dell-other-01",
@@ -290,14 +245,14 @@
         "partNumber": "OPT-3050-MFF-4G",
         "name": "Optiplex 3050 Micro Form Factor BTX 4GB",
         "category": "pc-mini",
-        "cpu": "Intel Core i3-6100T (DC/3MB/4T/3.2GHz)",
+        "cpu": "Intel Core i3-6100T (3.2GHz)",
         "ram": "4GB DDR4",
         "storage": "500GB HDD 2.5\"",
         "qty": 208,
+        "location": "Pallazo (208)",
+        "notes": "MAPPING: Masuk 1 unit ke Pallazo (Total Pallazo: 208)",
         "status": "ready",
-        "location": "Gudang Utama",
-        "notes": "Barang keadaan baru akan tetapi keluaran lama (Garansi 6 bulan + Mouse & Keyboard USB)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "updatedAt": "2026-09-13T13:16:14.759Z"
     },
     {
         "id": "dell-other-02",
@@ -305,14 +260,14 @@
         "partNumber": "OPT-3050-MFF-8G",
         "name": "Optiplex 3050 Micro Form Factor BTX 8GB",
         "category": "pc-mini",
-        "cpu": "Intel Core i3-6100T (DC/3MB/4T/3.2GHz)",
-        "ram": "8GB DDR4 (4GBx2)",
-        "storage": "500GB HDD 2.5\"",
+        "cpu": "Intel Core i3-6100T",
+        "ram": "8GB (2x4GB) DDR4",
+        "storage": "500GB HDD",
         "qty": 100,
         "status": "ready",
-        "location": "Gudang Utama",
-        "notes": "Barang keadaan baru akan tetapi keluaran lama (Garansi 6 bulan + Mouse & Keyboard USB)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "location": "Gudang Stok Lama",
+        "notes": "Windows 10 Pro + Keyboard & Mouse USB + Garansi 6 Bulan",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-other-03",
@@ -320,14 +275,14 @@
         "partNumber": "VOSTRO-3471-DT",
         "name": "VOSTRO DESKTOP DT 3471-I5-9400-8GB-1TB-UBT",
         "category": "pc-desktop",
-        "cpu": "Intel Core i5-9400 (up to 4.10GHz)",
-        "ram": "8GB DDR4 2400MHz",
-        "storage": "1TB HDD 7200 RPM 3.5\"",
+        "cpu": "Intel Core i5-9400 (up to 4.1GHz)",
+        "ram": "8GB DDR4",
+        "storage": "1TB HDD 7200 RPM",
         "qty": 165,
         "status": "ready",
-        "location": "Gudang Utama",
-        "notes": "Barang keadaan baru akan tetapi keluaran lama (Termasuk Dell Monitor 19.5\" E2020H + Keyboard Mouse, Garansi Concordia 1 Tahun)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "location": "Gudang Stok Lama",
+        "notes": "Include Monitor Dell E2020H + Keyboard & Mouse + Ubuntu + Garansi Concordia 1 Thn",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-other-04",
@@ -336,13 +291,13 @@
         "name": "Optiplex 3070 Small Form Factor",
         "category": "pc-desktop",
         "cpu": "Intel Core i3-9100",
-        "ram": "4GB DDR4 2666MHz",
-        "storage": "1TB HDD 7200rpm 3.5\"",
+        "ram": "4GB DDR4",
+        "storage": "1TB SATA HDD",
         "qty": 8,
         "status": "ready",
-        "location": "Gudang Utama",
-        "notes": "Barang keadaan baru akan tetapi keluaran lama (Windows 10 Home)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "location": "Gudang Stok Lama",
+        "notes": "Windows 10 Home",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     },
     {
         "id": "dell-other-05",
@@ -351,12 +306,12 @@
         "name": "Dell OptiPlex 3070 Minitower MLK",
         "category": "pc-desktop",
         "cpu": "Intel Core i5-9500",
-        "ram": "4GB DDR4 2666MHz",
-        "storage": "1TB HDD 7200rpm 3.5\"",
+        "ram": "4GB DDR4",
+        "storage": "1TB SATA HDD",
         "qty": 95,
         "status": "ready",
-        "location": "Gudang Utama",
-        "notes": "Barang keadaan baru akan tetapi keluaran lama (Ubuntu Linux 18.04)",
-        "updatedAt": "2026-09-09T16:00:00.000Z"
+        "location": "Gudang Stok Lama",
+        "notes": "Ubuntu Linux 18.04",
+        "updatedAt": "2026-09-12T13:15:00.000Z"
     }
 ]

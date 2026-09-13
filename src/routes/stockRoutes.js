@@ -5,6 +5,7 @@ import {
   saveAllStock,
   deleteStockUnit,
 } from '../services/stockService.js';
+import { generateStockExcel } from '../services/excelExportService.js';
 
 /**
  * Fastify Plugin untuk rute REST API /api/stock
@@ -19,6 +20,21 @@ export default async function stockRoutes(fastify) {
     } catch (error) {
       fastify.log.error(error);
       return reply.code(500).send({ error: 'Gagal mengambil data inventaris' });
+    }
+  });
+
+  // GET /api/stock/export-excel - Mengunduh file Excel sinkronisasi terbaru
+  fastify.get('/stock/export-excel', async (request, reply) => {
+    try {
+      const items = await getAllStock();
+      const { buffer, filename } = await generateStockExcel(items);
+      reply
+        .header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        .header('Content-Disposition', `attachment; filename="${filename}"`)
+        .send(buffer);
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal membuat file Excel' });
     }
   });
 
