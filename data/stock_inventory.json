@@ -242,23 +242,23 @@
     {
         "id": "dell-other-01",
         "brand": "DELL LAINNYA",
-        "partNumber": "OPT-3050-MFF-4G",
-        "name": "Optiplex 3050 Micro Form Factor BTX 4GB",
+        "partNumber": "GB3050MFF",
+        "name": "PC DELL OPTIPLEX 3050 MFF I3-6100T-8 GB (4GBX1-WIN10PRO",
         "category": "pc-mini",
         "cpu": "Intel Core i3-6100T (3.2GHz)",
         "ram": "4GB DDR4",
         "storage": "500GB HDD 2.5\"",
         "qty": 208,
         "location": "Pallazo (208)",
-        "notes": "MAPPING: Masuk 1 unit ke Pallazo (Total Pallazo: 208)",
+        "notes": "MAPPING: (Sisa Pallazo: 208)",
         "status": "ready",
-        "updatedAt": "2026-09-13T13:16:14.759Z"
+        "updatedAt": "2026-09-15T01:59:50.437Z"
     },
     {
         "id": "dell-other-02",
         "brand": "DELL LAINNYA",
-        "partNumber": "OPT-3050-MFF-8G",
-        "name": "Optiplex 3050 Micro Form Factor BTX 8GB",
+        "partNumber": "GB3050MFX7",
+        "name": "PC DELL OPTIPLEX 3050 MFF I3-6100T-8 GB (4GBX2)-HDD 500GB-WIN10PRO",
         "category": "pc-mini",
         "cpu": "Intel Core i3-6100T",
         "ram": "8GB (2x4GB) DDR4",
@@ -272,7 +272,7 @@
     {
         "id": "dell-other-03",
         "brand": "DELL LAINNYA",
-        "partNumber": "VOSTRO-3471-DT",
+        "partNumber": "GB46R63",
         "name": "VOSTRO DESKTOP DT 3471-I5-9400-8GB-1TB-UBT",
         "category": "pc-desktop",
         "cpu": "Intel Core i5-9400 (up to 4.1GHz)",

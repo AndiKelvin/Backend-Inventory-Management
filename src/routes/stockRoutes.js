@@ -6,6 +6,12 @@ import {
   deleteStockUnit,
 } from '../services/stockService.js';
 import { generateStockExcel } from '../services/excelExportService.js';
+import {
+  generateSmbHpExcel,
+  generateSmbDellExcel,
+  generateDistriHpExcel,
+  generateDistriDellExcel,
+} from '../services/smbExportService.js';
 
 /**
  * Fastify Plugin untuk rute REST API /api/stock
@@ -35,6 +41,58 @@ export default async function stockRoutes(fastify) {
     } catch (error) {
       fastify.log.error(error);
       return reply.code(500).send({ error: 'Gagal membuat file Excel' });
+    }
+  });
+
+  // GET /api/stock/export-smb - Mengunduh file Excel format SMB (HP / Dell)
+  fastify.get('/stock/export-smb', async (request, reply) => {
+    try {
+      const { brand } = request.query || {};
+      const targetBrand = (brand || '').toLowerCase();
+      const items = await getAllStock();
+
+      let result;
+      if (targetBrand === 'hp') {
+        result = await generateSmbHpExcel(items);
+      } else if (targetBrand === 'dell') {
+        result = await generateSmbDellExcel(items);
+      } else {
+        return reply.code(400).send({ error: 'Parameter brand harus berupa hp atau dell' });
+      }
+
+      reply
+        .header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        .header('Content-Disposition', `attachment; filename="${result.filename}"`)
+        .send(result.buffer);
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal membuat file Excel SMB' });
+    }
+  });
+
+  // GET /api/stock/export-distri - Mengunduh file Excel format Distri (HP / Dell)
+  fastify.get('/stock/export-distri', async (request, reply) => {
+    try {
+      const { brand } = request.query || {};
+      const targetBrand = (brand || '').toLowerCase();
+      const items = await getAllStock();
+
+      let result;
+      if (targetBrand === 'hp') {
+        result = await generateDistriHpExcel(items);
+      } else if (targetBrand === 'dell') {
+        result = await generateDistriDellExcel(items);
+      } else {
+        return reply.code(400).send({ error: 'Parameter brand harus berupa hp atau dell' });
+      }
+
+      reply
+        .header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        .header('Content-Disposition', `attachment; filename="${result.filename}"`)
+        .send(result.buffer);
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal membuat file Excel Distri' });
     }
   });
 
