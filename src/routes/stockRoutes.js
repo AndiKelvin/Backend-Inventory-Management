@@ -5,6 +5,10 @@ import {
   saveAllStock,
   deleteStockUnit,
 } from '../services/stockService.js';
+import {
+  getAllMovements,
+  recordMovement,
+} from '../services/movementService.js';
 import { generateStockExcel } from '../services/excelExportService.js';
 import {
   generateSmbHpExcel,
@@ -129,21 +133,24 @@ export default async function stockRoutes(fastify) {
   // POST /api/stock/save - Menambah atau memperbarui 1 unit
   fastify.post(
     '/stock/save',
-    {
-      schema: {
-        body: {
-          type: 'object',
-          required: ['id'],
-          properties: {
-            id: { type: 'string' },
-          },
-        },
-      },
-    },
     async (request, reply) => {
-      const unit = request.body;
+      const { movement, ...unit } = request.body;
       try {
         const saved = await saveStockUnit(unit);
+        if (movement) {
+          try {
+            await recordMovement({
+              ...movement,
+              itemId: saved.id,
+              partNumber: saved.partNumber || movement.partNumber,
+              itemName: saved.name || movement.itemName,
+              brand: saved.brand || movement.brand,
+              newQty: saved.qty,
+            });
+          } catch (mErr) {
+            fastify.log.warn({ err: mErr }, 'Gagal mencatat mutasi saat save unit');
+          }
+        }
         return saved;
       } catch (error) {
         fastify.log.error(error);
@@ -152,7 +159,30 @@ export default async function stockRoutes(fastify) {
     }
   );
 
-  // POST /api/stock/save-all - Simpan massal (Batch replacement)
+  // GET /api/stock/movements - Mengambil seluruh data riwayat mutasi stok
+  fastify.get('/stock/movements', async (request, reply) => {
+    try {
+      const { search, type, itemId, limit, offset } = request.query || {};
+      const movements = await getAllMovements({ search, type, itemId, limit, offset });
+      return movements;
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal mengambil riwayat mutasi' });
+    }
+  });
+
+  // POST /api/stock/movements - Menambahkan entri riwayat mutasi baru secara manual/langsung
+  fastify.post('/stock/movements', async (request, reply) => {
+    try {
+      const newEntry = await recordMovement(request.body);
+      return reply.code(201).send(newEntry);
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal mencatat mutasi' });
+    }
+  });
+
+  // POST /api/stock/save-all - Simpan massal (Batch replacement / Import)
   fastify.post('/stock/save-all', async (request, reply) => {
     const items = request.body;
     if (!Array.isArray(items)) {
@@ -160,7 +190,7 @@ export default async function stockRoutes(fastify) {
     }
     try {
       await saveAllStock(items);
-      return { success: true };
+      return { success: true, count: items.length };
     } catch (error) {
       fastify.log.error(error);
       return reply.code(500).send({ error: 'Gagal menyimpan seluruh data' });

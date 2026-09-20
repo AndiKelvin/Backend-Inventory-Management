@@ -98,11 +98,11 @@
         "cpu": "Intel Core i7-13700",
         "ram": "16GB",
         "storage": "512GB SSD",
-        "qty": 40,
+        "qty": 38,
         "status": "ready",
-        "location": "Pallazo (40)",
-        "notes": "STOCK JKT: Pallazo (40)",
-        "updatedAt": "2026-09-12T13:15:00.000Z"
+        "location": "Pallazo (38)",
+        "notes": "MAPPING: Take Out 2 unit dari Pallazo (Sisa Pallazo: 38)",
+        "updatedAt": "2026-09-19T12:57:55.689Z"
     },
     {
         "id": "dell-09",
@@ -250,9 +250,9 @@
         "storage": "500GB HDD 2.5\"",
         "qty": 208,
         "location": "Pallazo (208)",
-        "notes": "MAPPING: (Sisa Pallazo: 208)",
+        "notes": "STOK JKT: Sisa Pallazo: 208",
         "status": "ready",
-        "updatedAt": "2026-09-15T01:59:50.437Z"
+        "updatedAt": "2026-09-20T11:30:44.394Z"
     },
     {
         "id": "dell-other-02",

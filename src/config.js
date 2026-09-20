@@ -11,4 +11,5 @@ export const PORT = parseInt(process.env.PORT || '3000', 10);
 export const HOST = process.env.HOST || '0.0.0.0';
 
 export const DATA_PATH = path.resolve(__dirname, '..', 'data', 'stock_inventory.json');
+export const MOVEMENTS_PATH = path.resolve(__dirname, '..', 'data', 'stock_movements.json');
 export const FRONTEND_DIST_PATH = path.resolve(__dirname, '..', '..', 'frontend', 'dist');
