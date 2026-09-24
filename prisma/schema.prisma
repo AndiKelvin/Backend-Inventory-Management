@@ -1,0 +1,51 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model StockItem {
+  id         String   @id
+  brand      String
+  partNumber String?
+  name       String
+  category   String?
+  cpu        String?
+  ram        String?
+  storage    String?
+  qty        Int      @default(0)
+  status     String   @default("ready")
+  location   String?
+  notes      String?
+  updatedAt  DateTime @default(now()) @updatedAt
+  createdAt  DateTime @default(now())
+
+  @@index([brand])
+  @@index([category])
+  @@index([status])
+}
+
+model StockMovement {
+  id          String   @id
+  timestamp   DateTime @default(now())
+  itemId      String?
+  partNumber  String?
+  itemName    String?
+  brand       String?
+  type        String
+  amount      Int      @default(1)
+  previousQty Int?
+  newQty      Int?
+  location    String?
+  actor       String?
+  reference   String?
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  @@index([itemId])
+  @@index([type])
+  @@index([timestamp])
+}

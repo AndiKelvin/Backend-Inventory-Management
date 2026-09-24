@@ -8,6 +8,8 @@ import {
 import {
   getAllMovements,
   recordMovement,
+  updateMovement,
+  deleteMovement,
 } from '../services/movementService.js';
 import { generateStockExcel } from '../services/excelExportService.js';
 import {
@@ -179,6 +181,33 @@ export default async function stockRoutes(fastify) {
     } catch (error) {
       fastify.log.error(error);
       return reply.code(500).send({ error: 'Gagal mencatat mutasi' });
+    }
+  });
+
+  // PUT /api/stock/movements/:id - Memperbarui 1 entri catatan mutasi / job log
+  fastify.put('/stock/movements/:id', async (request, reply) => {
+    const { id } = request.params;
+    try {
+      const updated = await updateMovement(id, request.body);
+      return updated;
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal memperbarui catatan mutasi / job log' });
+    }
+  });
+
+  // DELETE /api/stock/movements/:id - Menghapus 1 entri riwayat mutasi berdasarkan ID
+  fastify.delete('/stock/movements/:id', async (request, reply) => {
+    const { id } = request.params;
+    try {
+      const success = await deleteMovement(id);
+      if (!success) {
+        return reply.code(404).send({ error: 'Riwayat mutasi tidak ditemukan' });
+      }
+      return { success: true };
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal menghapus riwayat mutasi' });
     }
   });
 
