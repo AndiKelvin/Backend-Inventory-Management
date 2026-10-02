@@ -161,7 +161,7 @@ export async function deleteMovement(id) {
 }
 
 /**
- * Memperbarui 1 entri catatan mutasi / job log berdasarkan ID
+ * Memperbarui 1 entri catatan mutasi / history berdasarkan ID
  * @param {string} id
  * @param {Object} data
  * @returns {Promise<Object>}

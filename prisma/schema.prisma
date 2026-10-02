@@ -49,3 +49,15 @@ model StockMovement {
   @@index([type])
   @@index([timestamp])
 }
+
+model Customer {
+  id          String   @id @default(uuid())
+  companyName String   @unique // atau tanpa @unique jika ada nama yang mirip
+  address     String?
+  contactName String?  // Boleh kosong/null
+  phone       String?  // Boleh kosong/null
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([companyName])
+}

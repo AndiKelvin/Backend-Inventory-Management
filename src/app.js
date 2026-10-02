@@ -4,6 +4,7 @@ import fastifyStatic from '@fastify/static';
 import fs from 'node:fs';
 import { FRONTEND_DIST_PATH } from './config.js';
 import stockRoutes from './routes/stockRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 /**
  * Membangun dan mengonfigurasi instance Fastify
@@ -19,11 +20,13 @@ export function buildApp(opts = {}) {
   // Daftarkan CORS agar React frontend (baik dev di 5173 maupun production) bisa mengakses API tanpa kendala
   app.register(cors, {
     origin: true,
-    methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-auth-token', 'x-app-pin'],
     credentials: true,
   });
 
   // Daftarkan API routes dengan prefix '/api'
+  app.register(authRoutes, { prefix: '/api' });
   app.register(stockRoutes, { prefix: '/api' });
 
   // Daftarkan static files jika folder frontend/dist ada (Production build)

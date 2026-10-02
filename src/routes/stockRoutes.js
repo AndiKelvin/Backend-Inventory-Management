@@ -4,6 +4,8 @@ import {
   saveStockUnit,
   saveAllStock,
   deleteStockUnit,
+  getAllCustomers,
+  getKnownSales,
 } from '../services/stockService.js';
 import {
   getAllMovements,
@@ -18,12 +20,28 @@ import {
   generateDistriHpExcel,
   generateDistriDellExcel,
 } from '../services/smbExportService.js';
+import { validateToken } from '../lib/auth.js';
 
 /**
  * Fastify Plugin untuk rute REST API /api/stock
+ * Dilindungi autentikasi PIN / Token Sesi
  * @param {import('fastify').FastifyInstance} fastify
  */
 export default async function stockRoutes(fastify) {
+  // Guard autentikasi untuk seluruh endpoint /api/stock
+  fastify.addHook('preHandler', async (request, reply) => {
+    const authHeader = request.headers['authorization'];
+    const tokenFromBearer = authHeader && authHeader.startsWith('Bearer ') ? authHeader.substring(7) : null;
+    const token = tokenFromBearer ||
+      request.headers['x-auth-token'] ||
+      request.headers['x-app-pin'] ||
+      (request.query && (request.query.token || request.query.pin));
+
+    if (!validateToken(token)) {
+      return reply.code(401).send({ error: 'Akses ditolak: PIN atau sesi login tidak valid' });
+    }
+  });
+
   // GET /api/stock - Mengambil seluruh data stok
   fastify.get('/stock', async (request, reply) => {
     try {
@@ -184,7 +202,7 @@ export default async function stockRoutes(fastify) {
     }
   });
 
-  // PUT /api/stock/movements/:id - Memperbarui 1 entri catatan mutasi / job log
+  // PUT /api/stock/movements/:id - Memperbarui 1 entri catatan mutasi / history
   fastify.put('/stock/movements/:id', async (request, reply) => {
     const { id } = request.params;
     try {
@@ -192,7 +210,7 @@ export default async function stockRoutes(fastify) {
       return updated;
     } catch (error) {
       fastify.log.error(error);
-      return reply.code(500).send({ error: 'Gagal memperbarui catatan mutasi / job log' });
+      return reply.code(500).send({ error: 'Gagal memperbarui catatan mutasi / history' });
     }
   });
 
@@ -235,6 +253,28 @@ export default async function stockRoutes(fastify) {
     } catch (error) {
       fastify.log.error(error);
       return reply.code(500).send({ error: 'Gagal menghapus unit' });
+    }
+  });
+
+  // GET /api/stock/customers - Mengambil seluruh data customer
+  fastify.get('/stock/customers', async (request, reply) => {
+    try {
+      const customers = await getAllCustomers();
+      return customers;
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal mengambil data customer' });
+    }
+  });
+
+  // GET /api/stock/sales - Mengambil daftar nama sales
+  fastify.get('/stock/sales', async (request, reply) => {
+    try {
+      const sales = await getKnownSales();
+      return sales;
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal mengambil data sales' });
     }
   });
 }

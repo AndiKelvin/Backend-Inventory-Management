@@ -1,4 +1,6 @@
+import fs from 'node:fs/promises';
 import { prisma } from '../lib/prisma.js';
+import { SALES_PATH } from '../config.js';
 
 /**
  * Format objek StockItem dari Prisma agar konsisten dengan ekspektasi frontend
@@ -178,4 +180,42 @@ export async function deleteStockUnit(id) {
     }
     throw err;
   }
+}
+
+/**
+ * Mengambil seluruh data customer dari PostgreSQL
+ * @returns {Promise<Array>}
+ */
+export async function getAllCustomers() {
+  return await prisma.customer.findMany({
+    orderBy: { companyName: 'asc' },
+  });
+}
+
+/**
+ * Mengambil daftar nama sales yang terdata
+ * Prioritas membaca dari data/sales.json agar mudah diedit/ditambah sewaktu-waktu
+ * @returns {Promise<Array<string>>}
+ */
+export async function getKnownSales() {
+  const DEFAULT_SALES = [
+    'Bondas', 'Carlo', 'Citra', 'Fungherry', 'Henny',
+    'Herry', 'Ibu Lusi', 'Irwin', 'Liza', 'Mukti',
+    'Pipit', 'Rama', 'Yussi'
+  ];
+
+  try {
+    const raw = await fs.readFile(SALES_PATH, 'utf-8');
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed
+        .map(s => String(s).trim())
+        .filter(Boolean)
+        .sort((a, b) => a.localeCompare(b));
+    }
+  } catch (err) {
+    // Jika file belum ada atau terjadi error parsing, gunakan fallback default
+  }
+
+  return DEFAULT_SALES.sort((a, b) => a.localeCompare(b));
 }
