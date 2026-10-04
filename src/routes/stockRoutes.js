@@ -5,7 +5,13 @@ import {
   saveAllStock,
   deleteStockUnit,
   getAllCustomers,
+  createCustomer,
+  updateCustomer,
+  deleteCustomer,
   getKnownSales,
+  saveKnownSales,
+  addKnownSales,
+  deleteKnownSales,
 } from '../services/stockService.js';
 import {
   getAllMovements,
@@ -120,7 +126,7 @@ export default async function stockRoutes(fastify) {
     }
   });
 
-  // POST /api/stock/update-qty - Memperbarui jumlah stok (+/-)
+  // POST /api/stock/update-qty - Memperbarui jumlah stok (+/-) dan otomatis mencatat mutasi
   fastify.post(
     '/stock/update-qty',
     {
@@ -131,14 +137,19 @@ export default async function stockRoutes(fastify) {
           properties: {
             id: { type: 'string' },
             delta: { type: 'integer' },
+            actor: { type: 'string' },
+            reference: { type: 'string' },
+            notes: { type: 'string' },
+            location: { type: 'string' },
+            type: { type: 'string' },
           },
         },
       },
     },
     async (request, reply) => {
-      const { id, delta } = request.body;
+      const { id, delta, actor, reference, notes, location, type } = request.body;
       try {
-        const updated = await updateStockQty(id, delta);
+        const updated = await updateStockQty(id, delta, { actor, reference, notes, location, type });
         if (!updated) {
           return reply.code(404).send({ error: 'Unit tidak ditemukan' });
         }
@@ -231,13 +242,20 @@ export default async function stockRoutes(fastify) {
 
   // POST /api/stock/save-all - Simpan massal (Batch replacement / Import)
   fastify.post('/stock/save-all', async (request, reply) => {
-    const items = request.body;
+    let items = request.body;
+    let mode = 'merge';
+
+    if (request.body && typeof request.body === 'object' && !Array.isArray(request.body)) {
+      items = request.body.items;
+      mode = request.body.mode || 'merge';
+    }
+
     if (!Array.isArray(items)) {
-      return reply.code(400).send({ error: 'Body harus berupa array data' });
+      return reply.code(400).send({ error: 'Body harus berupa array data atau objek { items: [], mode: string }' });
     }
     try {
-      await saveAllStock(items);
-      return { success: true, count: items.length };
+      await saveAllStock(items, mode);
+      return { success: true, count: items.length, mode };
     } catch (error) {
       fastify.log.error(error);
       return reply.code(500).send({ error: 'Gagal menyimpan seluruh data' });
@@ -256,16 +274,59 @@ export default async function stockRoutes(fastify) {
     }
   });
 
-  // GET /api/stock/customers - Mengambil seluruh data customer
+  // =================== CRUD CUSTOMER ===================
+
+  // GET /api/stock/customers - Mengambil seluruh data customer (dengan opsi pencarian)
   fastify.get('/stock/customers', async (request, reply) => {
     try {
-      const customers = await getAllCustomers();
+      const { search } = request.query || {};
+      const customers = await getAllCustomers(search);
       return customers;
     } catch (error) {
       fastify.log.error(error);
       return reply.code(500).send({ error: 'Gagal mengambil data customer' });
     }
   });
+
+  // POST /api/stock/customers - Tambah customer baru
+  fastify.post('/stock/customers', async (request, reply) => {
+    try {
+      const customer = await createCustomer(request.body);
+      return reply.code(201).send(customer);
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(400).send({ error: error.message || 'Gagal menambahkan customer' });
+    }
+  });
+
+  // PUT /api/stock/customers/:id - Perbarui data customer
+  fastify.put('/stock/customers/:id', async (request, reply) => {
+    const { id } = request.params;
+    try {
+      const updated = await updateCustomer(id, request.body);
+      return updated;
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(400).send({ error: error.message || 'Gagal memperbarui customer' });
+    }
+  });
+
+  // DELETE /api/stock/customers/:id - Hapus customer
+  fastify.delete('/stock/customers/:id', async (request, reply) => {
+    const { id } = request.params;
+    try {
+      const success = await deleteCustomer(id);
+      if (!success) {
+        return reply.code(404).send({ error: 'Customer tidak ditemukan' });
+      }
+      return { success: true };
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal menghapus customer' });
+    }
+  });
+
+  // =================== CRUD SALES ===================
 
   // GET /api/stock/sales - Mengambil daftar nama sales
   fastify.get('/stock/sales', async (request, reply) => {
@@ -275,6 +336,42 @@ export default async function stockRoutes(fastify) {
     } catch (error) {
       fastify.log.error(error);
       return reply.code(500).send({ error: 'Gagal mengambil data sales' });
+    }
+  });
+
+  // POST /api/stock/sales - Tambah nama sales baru
+  fastify.post('/stock/sales', async (request, reply) => {
+    try {
+      const { name } = request.body || {};
+      const updatedList = await addKnownSales(name);
+      return reply.code(201).send(updatedList);
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(400).send({ error: error.message || 'Gagal menambah sales' });
+    }
+  });
+
+  // PUT /api/stock/sales - Simpan/urutkan ulang daftar sales
+  fastify.put('/stock/sales', async (request, reply) => {
+    try {
+      const { salesList } = request.body || {};
+      const updatedList = await saveKnownSales(salesList);
+      return updatedList;
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(400).send({ error: error.message || 'Gagal memperbarui sales' });
+    }
+  });
+
+  // DELETE /api/stock/sales/:name - Hapus nama sales
+  fastify.delete('/stock/sales/:name', async (request, reply) => {
+    const { name } = request.params;
+    try {
+      const updatedList = await deleteKnownSales(decodeURIComponent(name));
+      return updatedList;
+    } catch (error) {
+      fastify.log.error(error);
+      return reply.code(500).send({ error: 'Gagal menghapus sales' });
     }
   });
 }
