@@ -13,8 +13,26 @@ import authRoutes from './routes/authRoutes.js';
  */
 export function buildApp(opts = {}) {
   const app = Fastify({
-    logger: true,
+    logger: false,
     ...opts,
+  });
+
+  // Handler error yang bersih dan elegan (hanya muncul saat ada kendala/error server)
+  app.setErrorHandler((error, request, reply) => {
+    const timestamp = new Date().toLocaleTimeString('id-ID');
+    const statusCode = error.statusCode || 500;
+
+    if (statusCode >= 500) {
+      console.error(
+        `\n\x1b[41m\x1b[97m SERVER ERROR \x1b[0m \x1b[90m[${timestamp}]\x1b[0m ` +
+        `\x1b[33m${request.method}\x1b[0m \x1b[36m${request.url}\x1b[0m\n` +
+        `  \x1b[31m↳ Pesan: ${error.message || 'Terjadi kesalahan internal server'}\x1b[0m\n`
+      );
+    }
+
+    reply.status(statusCode).send({
+      error: error.message || 'Terjadi kesalahan pada server',
+    });
   });
 
   // Daftarkan CORS agar React frontend (baik dev di 5173 maupun production) bisa mengakses API tanpa kendala

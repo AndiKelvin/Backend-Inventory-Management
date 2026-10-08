@@ -7,7 +7,10 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "seed:customers": "node prisma/importCustomers.js",
+    "db:migrate-data": "node prisma/migrateData.js",
+    "db:restore": "node prisma/restoreFromBackup.js"
   },
   "dependencies": {
     "@fastify/cors": "^11.3.0",
